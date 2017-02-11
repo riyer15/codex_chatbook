@@ -1,2 +1,2 @@
-# codex_chatbook
-A chatbot that gives recommendations for books based on a URL
+## Chatbook platform using Wit_ai
+a platform that connects links of articles to relevant books
