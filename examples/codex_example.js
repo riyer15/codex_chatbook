@@ -45,7 +45,7 @@ function retrieveData() {
     view: "Main View"
   }).eachPage(function page(records, fetchNextPage) {
       records.forEach(function(record) {
-          var currentKeyword = record.get('Keyword');
+          var currentKeyword = record.get('Keyword').toLowerCase();
           var currentURL = record.get('Article_URL');
           
           Url_Keyword[currentURL] = currentKeyword;
@@ -70,25 +70,29 @@ const actions = {
   },
   getRecommendations({context, entities}) {
     var url = firstEntityValue(entities, 'url');
+    delete context.recommendations_topic;
+    delete context.recommendations_link;
     if (url) {
         var keyword = Url_Keyword[url];
         var recommendation_list = Keyword_Recommendations[keyword].join(" ");
-        context.recommendations = url + " brought up recommendations: "
+        context.recommendations_link = url + " brought up recommendations: "
         + recommendation_list;
     } 
     return context;
   },
   getRecommendationOnTopic({context, entities}) {
-    var topic = firstEntityValue(entities, 'topic');
-    console.log(topic);
-    console.log(Keyword_Recommendations);
+    var topic = firstEntityValue(entities, 'topic').toLowerCase();
     if (topic) {
-      var recommendation_list = Keyword_Recommendations[keyword].join(" ");
-      context.recommendations = topic + " brought up recommendations: "
-      + recommendation_list; 
+      delete context.recommendations_topic;
+      delete context.recommendations_link;
+      if (Keyword_Recommendations[topic] !== undefined) {
+        context.recommendations_topic =  Keyword_Recommendations[topic].join(" ");
+      } else {
+        context.recommendations_topic = "Sorry we don't have any recommendations for " + topic;
+      } 
     } 
     return context;
-  }
+  },
 };
 
 const client = new Wit({accessToken, actions});
