@@ -2,7 +2,8 @@
 1 verbose cli [ '/usr/local/bin/node',
 1 verbose cli   '/usr/local/bin/npm',
 1 verbose cli   'install',
-1 verbose cli   'package.json' ]
+1 verbose cli   'npm@latest',
+1 verbose cli   '-g' ]
 2 info using npm@4.0.5
 3 info using node@v7.4.0
 4 verbose stack Error: Cannot find module 'internal/fs'
@@ -16,9 +17,9 @@
 4 verbose stack     at Object.Module._extensions..js (module.js:580:10)
 4 verbose stack     at Module.load (module.js:488:32)
 4 verbose stack     at tryModuleLoad (module.js:447:12)
-5 verbose cwd /Users/macbookpro/Documents/Penn-Year-2/node-wit
+5 verbose cwd /Users/macbookpro/Documents/Penn-Year-2/codex_chatbook
 6 error Darwin 16.1.0
-7 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "package.json"
+7 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "npm@latest" "-g"
 8 error node v7.4.0
 9 error npm  v4.0.5
 10 error code MODULE_NOT_FOUND

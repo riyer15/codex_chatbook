@@ -43,7 +43,14 @@ const actions = {
   getRecommendations({context, entities}) {
     var url = firstEntityValue(entities, 'url');
     if (url) {
-      context.recommendations = url + " brought up recommendations: The Brick "; // we should call a weather API here
+      context.recommendations = url + " brought up recommendations: Pride and Prejudice"; // we should call a weather API here
+    } 
+    return context;
+  },
+  getRecommendationOnTopic({context, entities}) {
+    var topic = firstEntityValue(entities, 'intent');
+    if (topic) {
+      context.recommendations = topic + " brought up recommendations: Pride and Prejudice"; // we should call a weather API here
     } 
     return context;
   },
