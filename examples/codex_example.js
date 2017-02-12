@@ -1,10 +1,20 @@
 'use strict';
 let Airtable = require('airtable');
+let AlchemyAPI = require('alchemy-api');
 let base = new Airtable({apiKey: 'keyfQVO1RdexomXw7'}).base('appVrZJFsq4Rmdm1T');
+let alchemy = new AlchemyAPI('fb3c6b13855b1b894ddd969da8a007b520bf53a0');
 let Wit = null;
 let interactive = null;
 let Keyword_Recommendations = {};
 var Url_Keyword = {};
+
+function getKeywords(url) {
+  alchemy.keywords(url, {}, function(err, response) {
+    if (err) throw err;
+    var keywords = response.keywords.slice(0, 15);
+    return keywords;
+  });
+}
 
 try {
   // if running from repo
@@ -61,6 +71,7 @@ function retrieveData() {
 
 // Actually retrieving AirTable data
 retrieveData();
+getKeywords();
 
 const actions = {
   send(request, response) {
@@ -74,9 +85,21 @@ const actions = {
     delete context.recommendations_link;
     if (url) {
         var keyword = Url_Keyword[url];
-        var recommendation_list = Keyword_Recommendations[keyword].join(" ");
-        context.recommendations_link = url + " brought up recommendations: "
-        + recommendation_list;
+        if (keyword === undefined) {
+          var keywords = getKeywords(url);
+          for (var i = 0; i < keywords.length; i++) {
+            if (Keyword_Recommendations[keywords[i]] !== undefined) {
+                 var recommendation_list = Keyword_Recommendations[keyword].join(" ");
+                context.recommendations_link = url + " brought up recommendations: "
+                + recommendation_list;
+            }
+          }
+        } else {
+           var recommendation_list = Keyword_Recommendations[keyword].join(" ");
+            context.recommendations_link = url + " brought up recommendations: "
+            + recommendation_list;
+        }
+       
     } 
     return context;
   },
