@@ -15,7 +15,7 @@
   "scripts": {
     "test": "mocha ./tests/lib.js",
     "start": "node index.js",
-    "bot": "node bot.js",
+    "bot": "node bot.js"
   },
   "repository": "https://github.com/wit-ai/node-wit",
   "author": "The Wit Team <help@wit.ai>",
