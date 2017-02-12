@@ -14,7 +14,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha ./tests/lib.js",
-    "start":"node examples/code_example.js TLERD3ZQ5H2QXSAGFCXWMT4D7S326GC4"
+    "start":"node ./examples/code_example.js TLERD3ZQ5H2QXSAGFCXWMT4D7S326GC4"
   },
   "repository": "https://github.com/wit-ai/node-wit",
   "author": "The Wit Team <help@wit.ai>",
