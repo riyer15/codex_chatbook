@@ -1,4 +1,4 @@
-'use strict';
+ 'use strict';
 
 // Messenger API integration example
 // We assume you have:
